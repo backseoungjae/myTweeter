@@ -19,7 +19,10 @@ export default function AddPost({
             imagePaths.map((image, i) => (
               <S.ImageBox key={image}>
                 <S.RemoveButton onClick={handleRemove(i)} />
-                <S.Image src={image} alt={image} />
+                <S.Image
+                  src={image.replace(/\/>thumb\//, 'original')}
+                  alt={image}
+                />
               </S.ImageBox>
             ))}
         </S.ImageInner>
