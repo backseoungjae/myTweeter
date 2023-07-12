@@ -20,11 +20,13 @@ exports.handler = async (event, context, callback) => {
       .resize(400, 400, { fit: "inside" })
       .toFormat(requiredFormat)
       .toBuffer();
-    await s3.putObject({
-      Bucket,
-      Key: `thumb/${filename}`,
-      Body: resizeImage,
-    });
+    await s3
+      .putObject({
+        Bucket,
+        Key: `thumb/${filename}`,
+        Body: resizeImage,
+      })
+      .promise();
     console.log("put ", resizeImage.length);
     return callback(null, `thumb/${filename}`);
   } catch (error) {
