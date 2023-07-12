@@ -4,6 +4,8 @@ const { isLoggedIn } = require("./middlewares");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const multerS3 = require("multer-s3");
+const AWS = require("aws-sdk");
 
 const router = express();
 
@@ -14,17 +16,29 @@ try {
   fs.mkdirSync("uploads");
 }
 
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2",
+});
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, done) {
-      done(null, "uploads");
-    },
-    filename(req, file, done) {
-      const ext = path.extname(file.originalname);
-      const basename = path.basename(file.originalname, ext);
-      done(null, basename + "_" + new Date().getTime() + ext);
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: "mytweeter-s3",
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`);
     },
   }),
+  // storage: multer.diskStorage({
+  //   destination(req, file, done) {
+  //     done(null, "uploads");
+  //   },
+  //   filename(req, file, done) {
+  //     const ext = path.extname(file.originalname);
+  //     const basename = path.basename(file.originalname, ext);
+  //     done(null, basename + "_" + new Date().getTime() + ext);
+  //   },
+  // }),
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
 });
 
@@ -89,7 +103,7 @@ router.post("/", isLoggedIn, upload.none(), async (req, res, next) => {
 
 router.post("/images", isLoggedIn, upload.array("image"), (req, res, next) => {
   console.log(req.files);
-  res.json(req.files.map((v) => v.filename));
+  res.json(req.files.map((v) => v.location.replace(/\/original\//, "/thumb/")));
 });
 
 router.get("/:postId", async (req, res, next) => {
