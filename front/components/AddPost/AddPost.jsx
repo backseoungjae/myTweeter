@@ -20,7 +20,7 @@ export default function AddPost({
               <S.ImageBox key={image}>
                 <S.RemoveButton onClick={handleRemove(i)} />
                 <S.Image
-                  src={image.replace(/\/>thumb\//, 'original')}
+                  src={image.replace(/\/thumb\//, '/original/')}
                   alt={image}
                 />
               </S.ImageBox>
