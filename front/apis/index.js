@@ -4,7 +4,7 @@ const getApiurl = () => process.env.NEXT_PUBLIC_API_LOCAL_URL;
 // axios.defaults.withCredentials = true;
 
 export const api = axios.create({
-  baseURL: getApiUrl(),
+  baseURL: getApiurl(),
   withCredentials: true,
 });
 
