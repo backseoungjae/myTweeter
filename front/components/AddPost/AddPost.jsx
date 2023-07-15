@@ -7,7 +7,7 @@ export default function AddPost({
   content,
   handleContent,
   imageUpload,
-  obChangeImages,
+  onChangeImages,
   handleRemove,
   handleAddPost,
 }) {
@@ -38,7 +38,7 @@ export default function AddPost({
           name="image"
           multiple
           ref={imageInput}
-          onChange={obChangeImages}
+          onChange={onChangeImages}
         />
         <S.Button onClick={imageUpload}>이미지 업로드</S.Button>
         <S.ButtonBox>

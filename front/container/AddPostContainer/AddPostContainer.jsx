@@ -20,7 +20,7 @@ export default function AddPostContainer() {
   }, []);
 
   // 이미지 업로드 이벤트
-  const obChangeImages = useCallback((e) => {
+  const onChangeImages = useCallback((e) => {
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, (item) => {
       imageFormData.append('image', item);
@@ -72,7 +72,7 @@ export default function AddPostContainer() {
       content={content}
       handleContent={handleContent}
       imageUpload={imageUpload}
-      obChangeImages={obChangeImages}
+      onChangeImages={onChangeImages}
       handleRemove={handleRemove}
       handleAddPost={handleAddPost}
     />

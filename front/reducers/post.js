@@ -32,6 +32,9 @@ export const initailState = {
   retweetLoading: false, // 리트윗
   retweetDone: false,
   retweetError: null,
+  uploadImagesLoading: false, // 이미지 업로드
+  uploadImagesDone: false,
+  uploadImagesError: null,
 };
 
 // 게시글 가져오기
