@@ -33,9 +33,13 @@ export default function Post({
             <S.Button onClick={handleRemovePost}>삭제</S.Button>
           </S.ButtonBox>
         ) : (
-          <S.FollowButton onClick={handleFollow}>
-            {isFollowing ? '언팔로우' : '팔로우'}
-          </S.FollowButton>
+          <>
+            {me && me?.id && (
+              <S.FollowButton onClick={handleFollow}>
+                {isFollowing ? '언팔로우' : '팔로우'}
+              </S.FollowButton>
+            )}
+          </>
         )}
         <S.Header>
           <Link href={`/user/${post?.User?.id}`} prefetch={false}>
