@@ -93,11 +93,13 @@ export default function Post({
       </S.Container>
       {toggleComment && (
         <>
-          <CommentForm
-            post={post}
-            me={me}
-            handleToggleComment={handleToggleComment}
-          />
+          {me && me?.id && (
+            <CommentForm
+              post={post}
+              me={me}
+              handleToggleComment={handleToggleComment}
+            />
+          )}
           {post?.Comments?.length ? (
             post?.Comments?.map((comment) => (
               <S.CommentsBox key={comment?.id}>
