@@ -12,7 +12,7 @@ export default function AddPost({
   handleAddPost,
 }) {
   return (
-    <S.Container onSubmit={handleAddPost}>
+    <S.Container>
       <S.AddPostInner>
         <S.ImageInner>
           {imagePaths?.length > 0 &&
@@ -42,7 +42,9 @@ export default function AddPost({
         />
         <S.Button onClick={imageUpload}>이미지 업로드</S.Button>
         <S.ButtonBox>
-          <S.Button disabled={!content}>등록하기</S.Button>
+          <S.Button disabled={!content} onClick={handleAddPost}>
+            등록하기
+          </S.Button>
         </S.ButtonBox>
       </S.AddPostInner>
     </S.Container>

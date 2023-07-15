@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { LuDelete } from 'react-icons/lu';
 
-export const Container = styled.form`
+export const Container = styled.div`
   width: 100%;
   margin-bottom: 30px;
 `;

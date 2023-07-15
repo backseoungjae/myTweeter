@@ -43,25 +43,21 @@ export default function AddPostContainer() {
     []
   );
 
-  const handleAddPost = useCallback(
-    (e) => {
-      e.preventDefault();
-      if (!content || !content.trim()) {
-        alert('게시글을 작성해 주세요.');
-      }
-      const formData = new FormData();
-      imagePaths.forEach((el) => {
-        formData.append('image', el);
-      });
+  const handleAddPost = useCallback(() => {
+    if (!content || !content.trim()) {
+      alert('게시글을 작성해 주세요.');
+    }
+    const formData = new FormData();
+    imagePaths.forEach((el) => {
+      formData.append('image', el);
+    });
 
-      formData.append('content', content);
-      return dispatch({
-        type: ADD_POST_REQUEST,
-        data: formData,
-      });
-    },
-    [content]
-  );
+    formData.append('content', content);
+    return dispatch({
+      type: ADD_POST_REQUEST,
+      data: formData,
+    });
+  }, [content]);
 
   useEffect(() => {
     if (addPostDone) {
