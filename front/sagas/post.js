@@ -250,15 +250,15 @@ function* retweet(action) {
 }
 
 function* watchLoadPosts() {
-  yield throttle(5000, LOAD_POSTS_REQUEST, loadPosts);
+  yield throttle(1000, LOAD_POSTS_REQUEST, loadPosts);
 }
 
 function* watchHashtagPost() {
-  yield throttle(5000, LOAD_HASHTAG_POSTS_REQUEST, hashtagPost);
+  yield throttle(1000, LOAD_HASHTAG_POSTS_REQUEST, hashtagPost);
 }
 
 function* watchLoadUserPosts() {
-  yield throttle(5000, LOAD_USER_POSTS_REQUEST, userPosts);
+  yield throttle(1000, LOAD_USER_POSTS_REQUEST, userPosts);
 }
 
 function* watchSinglePost() {
